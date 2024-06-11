@@ -19,6 +19,7 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "resolveJsonModule": true,
-    "types": ["Multer"]
+    "typeRoots": ["node_modules/@types"],
+    "types": ["multer"]
   }
 }
