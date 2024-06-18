@@ -17,6 +17,6 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(LISTEN_PORT as unknown as number);
+  await app.listen(3000);
 }
 bootstrap();
