@@ -61,6 +61,12 @@ export class Users {
   @Column({ default: false })
   isAdmin: boolean;
 
+  @Column({
+    type: 'varchar',
+    length: 50,
+  })
+  birthday: string;
+
   @OneToMany(() => Orders, (order) => order.user)
   @JoinColumn({
     name: 'orders_id',

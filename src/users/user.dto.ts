@@ -56,6 +56,10 @@ export class CreateUserDto {
 
   @IsEmpty()
   isAdmin: boolean;
+
+  @IsNotEmpty()
+  @IsString()
+  birthday: string;
 }
 
 export class LoginUserDto extends PickType(CreateUserDto, [

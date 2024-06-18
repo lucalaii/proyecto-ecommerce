@@ -16,8 +16,8 @@ export class AuthService {
   }
 
   async signUp(user: Partial<Users>) {
-    await this.usersRepository.getUserByEmail(user.email);
-    // if (foundedUser) throw new BadRequestException('Registered email');
+    const foundedUser = await this.usersRepository.getUserByEmail(user.email);
+    if (foundedUser) throw new BadRequestException('Registered email');
 
     const password = await bcrypt.hash(user.password, 10);
 

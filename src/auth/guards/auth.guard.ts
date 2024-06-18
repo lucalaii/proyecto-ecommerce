@@ -4,7 +4,7 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
+import { JwtService, TokenExpiredError } from '@nestjs/jwt';
 import { Observable } from 'rxjs';
 import { JWT_SECRET } from 'src/config/envs';
 import { Role } from 'src/users/roles.enum';
@@ -20,7 +20,6 @@ export class AuthGuard implements CanActivate {
     const token = req.headers.authorization?.split(' ')[1];
 
     if (!token) throw new UnauthorizedException('Token required');
-
     try {
       const payload = this.jwtService.verify(token, { secret: JWT_SECRET });
 
@@ -31,7 +30,11 @@ export class AuthGuard implements CanActivate {
       req.user = payload;
       return true;
     } catch (error) {
-      throw new UnauthorizedException('Invalid token');
+      if (error instanceof TokenExpiredError) {
+        throw new UnauthorizedException('Token expired');
+      } else {
+        throw new UnauthorizedException('Invalid token');
+      }
     }
   }
 }

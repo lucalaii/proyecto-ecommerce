@@ -5,12 +5,14 @@ import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule } from '@nestjs/swagger';
 import { LISTEN_HOST } from './config/envs';
 import { swaggerConfig } from './config/swagger';
+// import { GlobalExceptionFilter } from './middlewares/globalException';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  app.use(new LoggerMiddleware().use);
   app.useGlobalPipes(new ValidationPipe());
+  app.use(new LoggerMiddleware().use);
+  // app.useGlobalFilters(new GlobalExceptionFilter());
 
   const document = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('api', app, document);

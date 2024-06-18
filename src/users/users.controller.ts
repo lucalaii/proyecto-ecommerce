@@ -21,6 +21,7 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { UserGuard } from 'src/auth/guards/user.guard';
 
 @ApiTags('users')
 @Controller('users')
@@ -28,9 +29,9 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get()
-  @ApiBearerAuth()
   @Roles(Role.Admin)
   @UseGuards(AuthGuard, RolesGuard)
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Obtiene todos los usuarios' })
   @ApiResponse({ status: 200, description: 'Usuarios obtenidos exitosamente.' })
   @ApiResponse({ status: 401, description: 'Acceso no autorizado.' })
@@ -42,8 +43,8 @@ export class UsersController {
   }
 
   @Get(':id')
+  @UseGuards(AuthGuard, UserGuard)
   @ApiBearerAuth()
-  @UseGuards(AuthGuard)
   @ApiOperation({ summary: 'Obtiene un usuario por ID' })
   @ApiResponse({ status: 200, description: 'Usuario obtenido exitosamente.' })
   @ApiResponse({ status: 401, description: 'Acceso no autorizado.' })

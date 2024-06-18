@@ -16,6 +16,7 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { UserGuard } from 'src/auth/guards/user.guard';
 
 @ApiTags('orders')
 @Controller('orders')
@@ -23,7 +24,7 @@ export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 
   @Post()
-  @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard, UserGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Crea una nueva orden' })
   @ApiResponse({ status: 201, description: 'Orden creada exitosamente.' })
@@ -42,7 +43,7 @@ export class OrdersController {
   }
 
   @Get(':id')
-  @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard, UserGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Obtiene una orden por ID' })
   @ApiResponse({ status: 200, description: 'Orden obtenida exitosamente.' })
