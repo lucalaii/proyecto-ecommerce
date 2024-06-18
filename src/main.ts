@@ -3,7 +3,7 @@ import { AppModule } from './app.module';
 import { LoggerMiddleware } from './middlewares/logger';
 import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule } from '@nestjs/swagger';
-import { LISTEN_HOST } from './config/envs';
+import { LISTEN_PORT } from './config/envs';
 import { swaggerConfig } from './config/swagger';
 // import { GlobalExceptionFilter } from './middlewares/globalException';
 
@@ -17,6 +17,6 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(LISTEN_HOST);
+  await app.listen(LISTEN_PORT);
 }
 bootstrap();

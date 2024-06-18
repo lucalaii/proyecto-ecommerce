@@ -12,5 +12,5 @@ export const {
   CLOUDINARY_API_KEY,
   CLOUDINARY_API_SECRET,
   JWT_SECRET,
-  LISTEN_HOST,
+  LISTEN_PORT,
 } = process.env;
