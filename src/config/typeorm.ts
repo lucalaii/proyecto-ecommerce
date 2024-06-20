@@ -12,7 +12,7 @@ const config = {
   entities: ['dist/**/*.entity{.ts,.js}'],
   migrations: ['dist/migrations/*{.ts,.js}'],
   autoLoadEntities: true,
-  logging: false,
+  logging: 'all',
   synchronize: true,
   ssl: {
     rejectUnauthorized: false,
