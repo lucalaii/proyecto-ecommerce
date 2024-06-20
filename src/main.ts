@@ -18,7 +18,6 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   const port = Number(LISTEN_PORT);
-  console.log(port);
 
   await app.listen(port);
 }
